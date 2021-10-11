@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "deno",
+      "command": "compile",
+      "args": [
+        "-o",
+        "simp",
+        "cli/main.ts"
+      ],
+      "problemMatcher": [
+        "$deno"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "deno: my compile"
+    }
+  ]
+}
