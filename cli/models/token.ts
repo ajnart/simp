@@ -4,8 +4,7 @@ export class Token {
   attribute: string;
   modifier: string;
   parseAttribute(): string {
-    //TODO: Modify regex to exclude modifiers
-    return this.attribute = this.evaluatedToken.split(/[.]/)[1];
+    return this.attribute = this.evaluatedToken.split(/\.(.*)[+*-]/)[1];
   }
   parseModifier(): string {
     return this.modifier = this.evaluatedToken.split(/(?=[+*-])/)[1];
