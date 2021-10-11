@@ -36,21 +36,21 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
 
 #### Logic Blocks
 
-- domainName: the name of the website used to generate the password  
-- domainExtension: the extension of the website used  
-- master: the master password (**required**)  
+- ``domainName``: the name of the website used to generate the password  
+- ``domainExtension``: the extension of the website used  
+- ``master``: the master password (**required**)  
 
 #### Attributes
 
-- firstLetter: the first letter of the website/master/domain
-- lastLetter: the last letter of the website/master/domain
-- lenght: the length of the website/master/domain
+- ``firstLetter``: the first letter of the website/master/domain
+- ``lastLetter``: the last letter of the website/master/domain
+- ``lenght``: the length of the website/master/domain
 
 #### Modifiers
 
-- * : Modifier to apply a multiplication to an attribute
-- + : Modifier to apply an addition to an attribute
-- - : Modifier to apply a subtraction to an attribute
+- ``*`` : Modifier to apply a multiplication to an attribute
+- ``+`` : Modifier to apply an addition to an attribute
+- ``-`` : Modifier to apply a subtraction to an attribute
 
 **NOTES :**
 
