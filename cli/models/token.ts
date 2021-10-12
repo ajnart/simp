@@ -18,7 +18,5 @@ export class Token {
     this.logicblock = this.parseLogicBlock();
     this.attribute = this.parseAttribute();
     this.modifier = this.parseModifier();
-    // * Here we log the values we have extracted from the token
-    console.log(this.attribute);
   }
 }
