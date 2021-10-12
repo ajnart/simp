@@ -21,7 +21,6 @@ jobs:
 
       - name: Check format
         run: deno fmt --check
-        allow-failure: true
 
       - name: Run tests
         run: deno test --allow-read --allow-write
