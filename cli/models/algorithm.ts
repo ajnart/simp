@@ -13,6 +13,11 @@ export class customAlgorithm {
         parsedTokens.push(new Token(token));
       },
     );
+    if (
+      parsedTokens.find((token) => token.logicblock == "master") == undefined
+    ) {
+      throw Error("No master logic block in algorithm.");
+    }
     return parsedTokens;
   }
   //TODO: Implement the function that will compute the resulting password after every operation
