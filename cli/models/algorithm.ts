@@ -1,12 +1,20 @@
 import { Token } from "./token.ts";
 
-export class customAlgorithm {
+export class CustomAlgorithm {
   algorithm: string;
   constructor(stringAlgorithm: string) {
     this.algorithm = stringAlgorithm;
   }
 
+  validate(): boolean {
+    if (this.algorithm.search("{master}") == -1) {
+      throw Error("No master logic block in algorithm.");
+    }
+    return true;
+  }
+
   getParsedTokens(): Token[] {
+    this.validate();
     const parsedTokens: Token[] = [];
     this.algorithm.split(/[{}]/).filter((token) => token != "").forEach(
       (token) => {

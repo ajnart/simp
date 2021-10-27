@@ -2,11 +2,11 @@ import {
   assertEquals,
   assertThrows,
 } from "https://deno.land/std@0.110.0/testing/asserts.ts";
-import { customAlgorithm } from "../models/algorithm.ts";
+import { CustomAlgorithm } from "../models/algorithm.ts";
 import { Token } from "../models/token.ts";
 
 Deno.test("A little bit of parsing", () => {
-  const algorithm = new customAlgorithm(
+  const algorithm = new CustomAlgorithm(
     "{domainName.firstLetter+1}{domainLenght*2}{master}",
   );
   const token: Token[] = [];
@@ -17,7 +17,7 @@ Deno.test("A little bit of parsing", () => {
 });
 
 Deno.test("Advanced parsing", () => {
-  const algorithm = new customAlgorithm(
+  const algorithm = new CustomAlgorithm(
     "abc{domainLenght*2+1}{master}",
   );
   const token: Token[] = [];
@@ -28,7 +28,7 @@ Deno.test("Advanced parsing", () => {
 });
 
 Deno.test("Error: No master password", () => {
-  const algorithm = new customAlgorithm(
+  const algorithm = new CustomAlgorithm(
     "{domainLenght*2+1}",
   );
   assertThrows(
