@@ -29,7 +29,7 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
 `domainName.firstLetter` : **g**+2 postions in the alphabet is "i",
 `toUppercase` --> "I"\
 `master` : Toto --> Toto\
-`domainName.lenght*2` : `len(gmail)` * 2 --> **10**\
+`domainName.length*2` : `len(gmail)` * 2 --> **10**\
 `domainExtension.lastLetter+1`: `.com` .`lastLetter+1` --> m+1 --> **n**
 
 ### Avilable Logic Blocks, Attributes and Modifiers
@@ -44,7 +44,7 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
 
 - ``firstLetter``: the first letter of the website/master/domain
 - ``lastLetter``: the last letter of the website/master/domain
-- ``lenght``: the length of the website/master/domain
+- ``length``: the length of the website/master/domain
 
 #### Modifiers
 
