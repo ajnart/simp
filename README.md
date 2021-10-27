@@ -18,9 +18,10 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
 
 ### Example
 
-**Master password**: Toto  
-**Website used**: https://www.gmail.com  
-**Algorithm**: `{domainName.firstLetter+2.toUpper}{master}{domainName.lenght*2}{domainExtension.lastLetter+1}`
+**Master password**: Toto\
+**Website used**: https://www.gmail.com\
+**Algorithm**:
+`{domainName.firstLetter+2.toUpper}{master}{domainName.lenght*2}{domainExtension.lastLetter+1}`
 
 **Password generated**: `IToto10n`
 
@@ -36,30 +37,30 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
 
 #### Logic Blocks
 
-- ``domainName``: the name of the website used to generate the password  
-- ``domainExtension``: the extension of the website used  
-- ``master``: the master password (**required**)  
+- `domainName`: the name of the website used to generate the password
+- `domainExtension`: the extension of the website used
+- `master`: the master password (**required**)
 
 #### Attributes
 
-- ``firstLetter``: the first letter of the website/master/domain
-- ``lastLetter``: the last letter of the website/master/domain
-- ``length``: the length of the website/master/domain
+- `firstLetter`: the first letter of the website/master/domain
+- `lastLetter`: the last letter of the website/master/domain
+- `length`: the length of the website/master/domain
 
 #### Modifiers
 
-- ``*`` : Modifier to apply a multiplication to an attribute
-- ``+`` : Modifier to apply an addition to an attribute
-- ``-`` : Modifier to apply a subtraction to an attribute
+- `*` : Modifier to apply a multiplication to an attribute
+- `+` : Modifier to apply an addition to an attribute
+- `-` : Modifier to apply a subtraction to an attribute
 
 **NOTES :**
 
-- Comment on fait ?
-On split aux {}, on extrait les blocs logiques -> Attributs --> Modifiers
-Erreur : Retry (FEAT: Flêche qui affiche où est l'erreur dans l'algo)
-Erreur : Pas deux attributs
-Erreur : Pas deux modifiers pareils
-Erreur : Pas de modifiers sur des blocs logiques qui ne font pas sens. ("gmail+2" = ERREUR, "gmail*2" = OK)
-Ensuite on prends la ``str``, on lance la fonction qui correspond au bloc logique correspondant, avec ses attributs et ses modifiers sous forme de ``FonctionBlock(Attributs?, Modifiers?)`` 
+- Comment on fait ? On split aux {}, on extrait les blocs logiques -> Attributs
+  --> Modifiers Erreur : Retry (FEAT: Flêche qui affiche où est l'erreur dans
+  l'algo) Erreur : Pas deux attributs Erreur : Pas deux modifiers pareils Erreur
+  : Pas de modifiers sur des blocs logiques qui ne font pas sens. ("gmail+2" =
+  ERREUR, "gmail*2" = OK) Ensuite on prends la `str`, on lance la fonction qui
+  correspond au bloc logique correspondant, avec ses attributs et ses modifiers
+  sous forme de `FonctionBlock(Attributs?, Modifiers?)`
 
 LEGENDE: ? = Variable optionelle
