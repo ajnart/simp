@@ -81,7 +81,7 @@ async function main() {
       4,
     ),
   );
-  compute(algorithm, password, website);
+  compute(algorithm, password, { name: "google", extension: "com" });
 }
 
 main();
