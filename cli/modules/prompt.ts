@@ -25,6 +25,11 @@ export async function runPrompt(
       "masterPassword",
       "algorithm",
     );
+    if (masterPassword == null || algorithm == null) {
+      log.error(
+        "No config file found. Launch `simp config` to create one.",
+      );
+    }
   }
   if (algorithm == undefined) {
     algorithm = await Input.prompt({

@@ -72,9 +72,7 @@ async function main() {
     options.password,
     options.website,
   );
-  console.log(`algorithm: ${algorithm}`);
-  console.log(`password: ${password}`);
-  console.log(`website: ${website}`);
+  log.debug(JSON.stringify({ algorithm, password, website }, null, 2));
 }
 
 main();
