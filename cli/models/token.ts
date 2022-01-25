@@ -2,6 +2,7 @@ export class Token {
   logicblock: string;
   attribute: string;
   modifier: string;
+
   parseAttribute(evaluatedToken: string): string {
     return evaluatedToken.split(/\.(.*)[+*-]/)[1];
   }
