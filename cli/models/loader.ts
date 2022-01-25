@@ -15,9 +15,9 @@ export abstract class Loader {
         this.CONFIG_LOCATION,
       ));
     } catch (_) {
-      log.info("Config file was not found so JSON.parse failed for it.");
+      log.debug("Config file was not found so JSON.parse failed for it.");
     }
-    log.info(`config file contains:\n${JSON.stringify(config, null, 4)}`);
+    log.debug(`config file contains:\n${JSON.stringify(config, null, 4)}`);
     return config[key];
   }
 
@@ -30,7 +30,7 @@ export abstract class Loader {
         this.CONFIG_LOCATION,
       ));
     } catch (_) {
-      log.info("Config file was not found so JSON.parse failed for it.");
+      log.debug("Config file was not found so JSON.parse failed for it.");
     }
     config[key] = value;
     Deno.writeTextFileSync(

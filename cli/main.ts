@@ -1,7 +1,9 @@
 import { CustomAlgorithm } from "./models/algorithm.ts";
 import { Loader } from "./models/loader.ts";
+import { Input, Secret } from "https://deno.land/x/cliffy/prompt/mod.ts";
+import { validateAlgorithm } from "./models/validator.ts";
 
-function main() {
+async function main() {
   const algorithm: string = Loader.getItem("algorithm");
   let _algorithm: CustomAlgorithm;
 
@@ -9,9 +11,11 @@ function main() {
     _algorithm = new CustomAlgorithm(algorithm);
     console.log(`Found algorithm: ${_algorithm.algorithm}`);
   } else {
-    _algorithm = new CustomAlgorithm(
-      prompt("Please enter your algorithm:") as string,
-    );
+    const Inputedalgorithm = await Input.prompt({
+      message: "Enter your algorithm:",
+      validate: (input) => validateAlgorithm(input),
+    });
+    _algorithm = new CustomAlgorithm(Inputedalgorithm);
     Loader.setItem("algorithm", _algorithm.algorithm);
     console.log("Algorithm saved!");
   }
@@ -26,7 +30,12 @@ function main() {
     console.log(`Found master password: ${masterPassword}`);
   } else {
     console.log(`No master password found`);
-    masterPassword = prompt("Master password:");
+
+    masterPassword = await Secret.prompt({
+      message: "Choose a master password",
+      minLength: 4,
+    });
+
     Loader.setItem("masterPassword", masterPassword as string);
   }
 }

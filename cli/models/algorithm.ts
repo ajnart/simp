@@ -1,4 +1,5 @@
 import { Token } from "./token.ts";
+import { validateAlgorithm } from "./validator.ts";
 
 export class CustomAlgorithm {
   algorithm: string;
@@ -6,15 +7,8 @@ export class CustomAlgorithm {
     this.algorithm = stringAlgorithm;
   }
 
-  validate(): boolean {
-    if (this.algorithm.search("{master}") == -1) {
-      throw Error("No master logic block in algorithm.");
-    }
-    return true;
-  }
-
   getParsedTokens(): Token[] {
-    this.validate();
+    validateAlgorithm(this.algorithm);
     const parsedTokens: Token[] = [];
     this.algorithm.split(/[{}]/).filter((token) => token != "").forEach(
       (token) => {
