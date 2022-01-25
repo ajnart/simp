@@ -5,6 +5,7 @@ import {
 } from "https://deno.land/x/cliffy/prompt/mod.ts";
 import { Loader } from "../models/loader.ts";
 import { validateAlgorithm, validateWebsite } from "../models/validator.ts";
+import * as log from "https://deno.land/std/log/mod.ts";
 
 export async function runPrompt(
   algorithm: string,
@@ -18,44 +19,38 @@ export async function runPrompt(
       default: true,
     });
 
-  if (usesConfig && algorithm == undefined) {
-    algorithm = Loader.getItem("algorithm");
+  log.debug(`uses config: ${usesConfig}`);
+  if (usesConfig == true) {
+    [masterPassword, algorithm] = Loader.getConfigItems(
+      "masterPassword",
+      "algorithm",
+    );
   }
-
-  if (usesConfig && masterPassword == undefined) {
-    masterPassword = Loader.getItem("masterPassword");
-  }
-
-  if (algorithm != undefined) {
-    console.log(`Found algorithm!`);
-  } else {
+  if (algorithm == undefined) {
     algorithm = await Input.prompt({
       message: "Enter your algorithm:",
       validate: validateAlgorithm,
     });
-    Loader.setItem("algorithm", algorithm);
-    console.log("Algorithm saved!");
   }
 
-  if (masterPassword) {
-    console.log(`Found master password!`);
-  } else {
-    console.log(`No master password found`);
-
+  if (masterPassword == undefined) {
     masterPassword = await Secret.prompt({
       message: "Choose a master password",
       minLength: 4,
     });
-
-    Loader.setItem("masterPassword", masterPassword);
-    console.log("Master password saved!");
   }
   if (website) {
     console.log(`Found website! (${website})`);
   } else {
     website = await Input.prompt({
       message: "Enter website:",
-      validate: validateWebsite,
+      validate: (website) => {
+        try {
+          validateWebsite(website);
+        } catch (error) {
+          return error.message;
+        }
+      },
     });
   }
   return [algorithm, masterPassword, website];
