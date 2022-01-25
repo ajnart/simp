@@ -7,8 +7,9 @@ import {
 import * as log from "https://deno.land/std/log/mod.ts";
 import { validateAlgorithm, validateWebsite } from "./models/validator.ts";
 import { runConfig } from "./modules/config.ts";
+import { compute } from "./modules/computer.ts";
 
-const command = await new Command()
+const command = new Command()
   .name("simp")
   .description("Simple password manager")
   .version("0.0.1")
@@ -24,10 +25,11 @@ const command = await new Command()
     "use the specified password instead",
   )
   .type("website", ({ label, name, value }: ITypeInfo): string => {
-    const error = validateWebsite(value);
-    if (typeof error === "string") {
+    try {
+      const error = validateWebsite(value);
+    } catch (e) {
       throw new ValidationError(
-        `${label} "${name}" must be a valid website.Error: "${error}"`,
+        `${label} "${name}" must be a valid website.Error: "${e}"`,
       );
     }
     return value;
@@ -72,7 +74,14 @@ async function main() {
     options.password,
     options.website,
   );
-  log.debug(JSON.stringify({ algorithm, password, website }, null, 2));
+  console.log(
+    JSON.stringify(
+      { algorithm: algorithm, password: password, website: website },
+      null,
+      4,
+    ),
+  );
+  compute(algorithm, password, website);
 }
 
 main();

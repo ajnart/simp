@@ -34,7 +34,13 @@ export async function runPrompt(
   if (algorithm == undefined) {
     algorithm = await Input.prompt({
       message: "Enter your algorithm:",
-      validate: validateAlgorithm,
+      validate: (e) => {
+        try {
+          validateAlgorithm(e);
+        } catch (error) {
+          return error.message;
+        }
+      },
     });
   }
 
