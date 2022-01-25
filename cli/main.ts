@@ -4,19 +4,17 @@ import {
   ITypeInfo,
   ValidationError,
 } from "https://deno.land/x/cliffy/command/mod.ts";
+import * as log from "https://deno.land/std/log/mod.ts";
 import { validateAlgorithm, validateWebsite } from "./models/validator.ts";
+import { runConfig } from "./modules/config.ts";
 
 const command = await new Command()
   .name("simp")
   .description("Simple password manager")
   .version("0.0.1")
-  .type("algorithm", ({ label, name, value }: ITypeInfo): string => {
-    const error = validateAlgorithm(value);
-    if (typeof error === "string") {
-      throw new ValidationError(
-        `${label} "${name}" must be a valid algorithm.Error: "${error}"`,
-      );
-    }
+  .option("-c, --config", "re-start config.")
+  .type("algorithm", ({ value }: ITypeInfo): string => {
+    validateAlgorithm(value);
     return value;
   })
   .arguments("[algorithm:algorithm]")
@@ -38,9 +36,24 @@ const command = await new Command()
   .option(
     "-w, --website <value:website>",
     "use the specified website instead",
+  )
+  .command(
+    "config",
+    new Command()
+      .description("Configure the password manager")
+      .action(
+        async () => {
+          await runConfig();
+          Deno.exit(0);
+        },
+      ),
   );
 
-let options: { algorithm: string; password: string; website: string };
+let options: {
+  algorithm: string;
+  password: string;
+  website: string;
+};
 
 try {
   ({ options } = await command.parse());
@@ -53,7 +66,7 @@ try {
 }
 
 async function main() {
-  console.log(JSON.stringify(options, null, 2));
+  log.debug(JSON.stringify(options, null, 2));
   const [algorithm, password, website] = await runPrompt(
     options.algorithm,
     options.password,
