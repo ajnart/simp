@@ -21,6 +21,20 @@ export abstract class Loader {
     return config[key];
   }
 
+  static getConfigItems(...items: string[]) {
+    return items.map(
+      (item: string): string => this.getItem(item),
+    );
+  }
+
+  static setConfig(config: Record<string, unknown>): void {
+    ensureFileSync(this.CONFIG_LOCATION);
+    Deno.writeTextFileSync(
+      this.CONFIG_LOCATION,
+      JSON.stringify(config, null, 4),
+    );
+  }
+
   static setItem(key: string, value: string): void {
     // Check if config file exists. If it doen't, we create it.
     ensureFileSync(this.CONFIG_LOCATION);
