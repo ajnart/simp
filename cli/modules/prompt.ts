@@ -4,6 +4,7 @@ import {
   Secret,
 } from "https://deno.land/x/cliffy/prompt/mod.ts";
 import { Loader } from "../models/loader.ts";
+import { validateAlgorithm, validateWebsite } from "../models/validator.ts";
 
 export async function runPrompt(
   algorithm: string,
@@ -17,9 +18,12 @@ export async function runPrompt(
       default: true,
     });
 
-  if (usesConfig) {
-    masterPassword = Loader.getItem("masterPassword");
+  if (usesConfig && algorithm == undefined) {
     algorithm = Loader.getItem("algorithm");
+  }
+
+  if (usesConfig && masterPassword == undefined) {
+    masterPassword = Loader.getItem("masterPassword");
   }
 
   if (algorithm != undefined) {
@@ -27,7 +31,7 @@ export async function runPrompt(
   } else {
     algorithm = await Input.prompt({
       message: "Enter your algorithm:",
-      validate: (input) => input.search("{master}") != -1,
+      validate: validateAlgorithm,
     });
     Loader.setItem("algorithm", algorithm);
     console.log("Algorithm saved!");
@@ -51,17 +55,7 @@ export async function runPrompt(
   } else {
     website = await Input.prompt({
       message: "Enter website:",
-      validate: (input) => {
-        // https://www.regextester.com/94502
-        // Turbo regex to check that a url is valid
-        if (
-          input.match(
-            /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/,
-          ) != null
-        ) {
-          return true;
-        } else return "Invalid URL";
-      },
+      validate: validateWebsite,
     });
   }
   return [algorithm, masterPassword, website];
