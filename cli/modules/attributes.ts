@@ -6,7 +6,7 @@ const lastLetter = (data: string): string => {
   return data[data.length - 1];
 };
 
-const length_ = (data: string): string => {
+const length = (data: string): string => {
   return data.length.toString();
 };
 
@@ -47,7 +47,7 @@ const default_ = (data: string): string => {
 export const attributesList = [
   firstLetter,
   lastLetter,
-  length_,
+  length,
   reverse,
   toUpper,
   toLower,
