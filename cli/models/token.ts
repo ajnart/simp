@@ -1,16 +1,21 @@
 export class Token {
   logicblock: string;
-  attribute: string;
+  attribute: string[];
   modifier: string;
 
-  parseAttribute(evaluatedToken: string): string {
-    return evaluatedToken.split(/\.(.*)[+*-]/)[1];
+  parseLogicBlock(evaluatedToken: string): string {
+    return evaluatedToken.split(/(?=[+*-])|[.]/)[0];
   }
   parseModifier(evaluatedToken: string): string {
     return evaluatedToken.split(/(?=[+*-])/)[1];
   }
-  parseLogicBlock(evaluatedToken: string): string {
-    return evaluatedToken.split(/(?=[+*-])|[.]/)[0];
+  parseAttribute(evaluatedToken: string): string[] {
+    const evaluated = evaluatedToken.split(/\.(.*)/)[1];
+    if (evaluated != undefined) {
+      return evaluated.split(/(?=[+*-])/).slice(0, 1)[0].split(".");
+    }
+    return [];
+    // return [];
   }
 
   constructor(evaluatedToken: string) {
