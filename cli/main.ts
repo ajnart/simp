@@ -1,71 +1,10 @@
 import { runPrompt } from "./modules/prompt.ts";
-import {
-  Command,
-  ITypeInfo,
-  ValidationError,
-} from "https://deno.land/x/cliffy/command/mod.ts";
 import * as log from "https://deno.land/std/log/mod.ts";
-import { validateAlgorithm, validateWebsite } from "./models/validator.ts";
-import { runConfig } from "./modules/config.ts";
+import { Website } from "./models/parser.ts";
 import { compute } from "./modules/computer.ts";
+import { runCli } from "./modules/cli.ts";
 
-const command = new Command()
-  .name("simp")
-  .description("Simple password manager")
-  .version("0.0.1")
-  .option("-c, --config", "re-start config.")
-  .type("algorithm", ({ value }: ITypeInfo): string => {
-    validateAlgorithm(value);
-    return value;
-  })
-  .arguments("[algorithm:algorithm]")
-  .option("-a, --algorithm <value:algorithm>", "Your algorithm.")
-  .option(
-    "-p, --password <string>",
-    "use the specified password instead",
-  )
-  .type("website", ({ label, name, value }: ITypeInfo): string => {
-    try {
-      const error = validateWebsite(value);
-    } catch (e) {
-      throw new ValidationError(
-        `${label} "${name}" must be a valid website.Error: "${e}"`,
-      );
-    }
-    return value;
-  })
-  .arguments("[website:website]")
-  .option(
-    "-w, --website <value:website>",
-    "use the specified website instead",
-  )
-  .command(
-    "config",
-    new Command()
-      .description("Configure the password manager")
-      .action(
-        async () => {
-          await runConfig();
-          Deno.exit(0);
-        },
-      ),
-  );
-
-let options: {
-  algorithm: string;
-  password: string;
-  website: string;
-};
-
-try {
-  ({ options } = await command.parse());
-} catch (error) {
-  if (error instanceof ValidationError) {
-    command.showHelp();
-    Deno.exit(1);
-  }
-  throw error;
-}
+const options = await runCli();
 
 async function main() {
   log.debug(JSON.stringify(options, null, 2));
@@ -74,14 +13,7 @@ async function main() {
     options.password,
     options.website,
   );
-  console.log(
-    JSON.stringify(
-      { algorithm: algorithm, password: password, website: website },
-      null,
-      4,
-    ),
-  );
-  compute(algorithm, password, { name: "google", extension: "com" });
+  compute(algorithm, password, new Website(website));
 }
 
 main();
