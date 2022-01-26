@@ -6,11 +6,12 @@ import {
 import { validateAlgorithm } from "../models/validator.ts";
 
 Deno.test("Validate basic algorithm", () => {
-  const algorithm = "{domainName.firstLetter+1}{domainLenght*2}{master}";
+  const algorithm =
+    "{domainName.firstLetter+1}{domainExtension.length*2}{master}";
   assertEquals(validateAlgorithm(algorithm), true);
 });
 
 Deno.test("Failed to validate algorithm", () => {
-  const algorithm = "{domainName.firstLetter+1}{domainLenght*2}";
+  const algorithm = "{domainName.firstLetter+1}{domainExtension.length*2}";
   assertThrows(() => validateAlgorithm(algorithm));
 });

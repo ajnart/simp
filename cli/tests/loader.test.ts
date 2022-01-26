@@ -2,7 +2,8 @@ import { assertEquals } from "https://deno.land/std@0.110.0/testing/asserts.ts";
 
 import { Loader } from "../models/loader.ts";
 
-const base_algo = "{domainName.firstLetter+1}{domainLenght*2}{master}";
+const base_algo =
+  "{domainName.firstLetter+1}{domainExtension.length*2}{master}";
 const complex_master = "H4ck3ing1sLif3";
 Deno.test("Loader basics", () => {
   Loader.setItem(
