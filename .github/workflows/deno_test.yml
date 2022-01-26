@@ -26,9 +26,7 @@ jobs:
       - name: Compile
         run: deno compile --allow-read --allow-write --allow-env --unstable -o simp cli/main.ts
 
-      - name: Upload artifacts
-        uses: actions/artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
-          name: simp binary (linux)
+          name: simp
           path: simp
-          mime-type: application/javascript
