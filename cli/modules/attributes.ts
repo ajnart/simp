@@ -1,55 +1,59 @@
-
-const firstLetter = (data: string) => {
+const firstLetter = (data: string): string => {
   return data[0];
 };
 
-const lastLetter = (data: string) => {
-  return data[-1];
-}
+const lastLetter = (data: string): string => {
+  return data[data.length - 1];
+};
 
-const length_ = (data: string) => {
-    return data.length;
-}
+const length_ = (data: string): string => {
+  return data.length.toString();
+};
 
-const reverse = (data: string) => {
-    return data.split('').reverse().join('');
-}
+const reverse = (data: string): string => {
+  return data.split("").reverse().join("");
+};
 
-const upper = (data: string) => {
-    return data.toUpperCase();
-}
+const toUpper = (data: string): string => {
+  return data.toUpperCase();
+};
 
-const lower = (data: string) => {
-    return data.toLowerCase();
-}
+const toLower = (data: string): string => {
+  return data.toLowerCase();
+};
 
-const capitalize = (data: string) => {
-    return data.charAt(0).toUpperCase() + data.slice(1);
-}
+const reversed = (data: string): string => {
+  return data.split("").reverse().join("");
+};
 
-const camelCase = (data: string) => {
-    return data.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, '');
-}
+const capitalize = (data: string): string => {
+  return data.charAt(0).toUpperCase() + data.slice(1);
+};
 
-const snakeCase = (data: string) => {
-    return data.replace(/\s/g, '_').toLowerCase();
-}
+const camelCase = (data: string): string => {
+  return data.replace(/\s(.)/g, function ($1) {
+    return $1.toUpperCase();
+  }).replace(/\s/g, "");
+};
 
-const default_ = (data: string) => {
-    return data;
-}
+const snakeCase = (data: string): string => {
+  return data.replace(/\s/g, "_").toLowerCase();
+};
 
-const attributes = [
-    firstLetter,
-    lastLetter,
-    length_,
-    reverse,
-    upper,
-    lower,
-    capitalize,
-    camelCase,
-    snakeCase,
-    default_
-]
+const default_ = (data: string): string => {
+  return data;
+};
 
-export default attributes;
+export const attributesList = [
+  firstLetter,
+  lastLetter,
+  length_,
+  reverse,
+  toUpper,
+  toLower,
+  reversed,
+  capitalize,
+  camelCase,
+  snakeCase,
+  default_,
+];
