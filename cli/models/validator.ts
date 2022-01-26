@@ -35,6 +35,7 @@ export function validateAlgorithm(algorithm: string): boolean {
   logicBlocks!.forEach((logicBlock) => {
     // Remove the { and }
     logicBlock = logicBlock.substring(1, logicBlock.length - 1);
+    logicBlock = logicBlock.split(".")[0];
     // Check that the logic block is defined in logicblocks.ts
     if (logicBlocksList.indexOf(logicBlock) == -1) {
       throw new ValidationError(
