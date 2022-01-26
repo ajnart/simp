@@ -1,29 +1,18 @@
 import { parseTokens } from "../models/parser.ts";
 import { Token } from "../models/token.ts";
-import Attributes from "./attributes.ts";
+import { attributesList } from "./attributes.ts";
 
-const attributesNames = [
-  "firstLetter",
-  "lastLetter",
-  "length_",
-  "reverse",
-  "upper",
-  "lower",
-  "capitalize",
-  "camelCase",
-  "snakeCase",
-  "default_"
-];
+const attributesNames = attributesList.map((fct) => fct.name);
 
 export function compute(
   algorithm: string,
   password: string,
-  website: { name: string; extension: string; },
+  website: { name: string; extension: string },
 ) {
   const tokens: Token[] = parseTokens(algorithm);
   let computedPassword = "";
   for (const token of tokens) {
-    token.logicblock = () => {
+    token.logicblock = (() => {
       switch (token.logicblock) {
         case "master":
           return password;
@@ -31,13 +20,18 @@ export function compute(
           return website.name;
         case "domainExtension":
           return website.extension;
+        default:
+          return token.logicblock;
       }
-    };
+    })() as string;
   }
   for (const token of tokens) {
     let computedToken: string = token.logicblock;
     for (const attribute of token.attribute) {
-      computedToken = Attributes[attributesNames.indexOf(attribute) || -1](computedToken);
+      computedToken = attributesList[attributesNames.indexOf(attribute)].call(
+        null,
+        computedToken,
+      );
     }
     computedPassword += computedToken;
   }
