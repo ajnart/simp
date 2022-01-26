@@ -9,3 +9,15 @@ export function parseTokens(algorithm: string): Token[] {
   );
   return parsedTokens;
 }
+
+export class Website {
+  name: string;
+  url: string;
+  extension: string;
+  constructor(url: string) {
+    //TODO: Use regex to get base domain name and extension
+    this.url = url;
+    this.name = url.split(".")[0];
+    this.extension = url.split(".")[1];
+  }
+}
