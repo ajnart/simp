@@ -21,12 +21,11 @@ export async function runConfig(): Promise<
     name: "algorithm",
     message: "Enter your algorithm:",
     type: Input,
-    suggestions: ["{master}", "{WebsiteName}"],
     validate: (algorithm) => {
       try {
         validateAlgorithm(algorithm);
       } catch (error) {
-        return (error.me);
+        return (error.message);
       }
     },
   }, {
