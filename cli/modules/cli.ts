@@ -19,7 +19,7 @@ export async function runCli() {
     .arguments("[algorithm:algorithm]")
     .option("-a, --algorithm <value:algorithm>", "Your algorithm.")
     .option("-p, --password <string>", "use the specified password instead")
-    .type("website", ({ label, name, value }: ITypeInfo): string => {
+    .type("website", ({ value }: ITypeInfo): string => {
       validateWebsite(value);
       return value;
     })
