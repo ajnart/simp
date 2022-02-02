@@ -21,7 +21,7 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
 **Master password**: Toto\
 **Website used**: https://www.gmail.com\
 **Algorithm**:
-`{domainName.firstLetter+2.toUpper}{master}{domainName.lenght*2}{domainExtension.lastLetter+1}`
+`{domainName.firstLetter+2.toUpper}{master}{domainName.length*2}{domainExtension.lastLetter+1}`
 
 **Password generated**: `IToto10n`
 
@@ -64,3 +64,4 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
   sous forme de `FonctionBlock(Attributs?, Modifiers?)`
 
 LEGENDE: ? = Variable optionelle
+{domainName.firstLetter.toUpper+1}{domainExtension.reversed.toUpper}{domainExtension.firstLetter*2}{master}{domainName.lastLetter-1}_gen
