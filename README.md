@@ -18,7 +18,7 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
 ### Example
 
 **Master password**: Toto\
-**Website used**: https://www.gmail.com\
+**Website used**: https://www.gmail.com  
 **Algorithm**:
 `{domainName.firstLetter.toUpper}{master}{domainName.length}{domainExtension.lastLetter}`
 
