@@ -27,10 +27,10 @@ algorithm. Allowing you to reverse-engineer it yourself if you ever need to.
 #### Explaination:
 
 `domainName.firstLetter` : **g**,\
-`toUppercase` --> **G**,\
-`master` : Toto --> Toto\
-`domainName.length` : `len(gmail)` --> **5**\
-`domainExtension.lastLetter+1`: `.com` .`lastLetter` --> m --> **m**
+`toUppercase` : **G**,\
+`master` : Toto : Toto\
+`domainName.length` : `len(gmail)` : **5**\
+`domainExtension.lastLetter+1`: `.com` .`lastLetter` : **m**
 
 ### Avilable Logic Blocks, Attributes and Modifiers
 
