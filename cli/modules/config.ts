@@ -13,7 +13,8 @@ export async function runConfig(): Promise<
   console.log("%c Welcome to SIMP config!", style);
   console.log(
     "If you have not read it already, please read the README.md",
-    "and then come back here.",
+    "\n(https://github.com/ajnart/simp/blob/main/README.md)",
+    "\nand then come back here.",
     "\nIt will explain to you all the details about creating your custom algorithm.",
     "\nAlright, let's get started!",
   );
