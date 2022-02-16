@@ -10,10 +10,6 @@ const length = (data: string): string => {
   return data.length.toString();
 };
 
-const reverse = (data: string): string => {
-  return data.split("").reverse().join("");
-};
-
 const toUpper = (data: string): string => {
   return data.toUpperCase();
 };
@@ -48,7 +44,6 @@ export const attributesList = [
   firstLetter,
   lastLetter,
   length,
-  reverse,
   toUpper,
   toLower,
   reversed,
