@@ -15,7 +15,7 @@ First of all, you need launch the CLI with `simp config` to make a new config.
 
 - provide a master password. This password will be used to generate the other
   passwords.
-- choose an algorithm, using logic blocks we provide.
+- choose an algorithm, using the logic blocks and modifiers that we provide.
 
 Once the config is done, the info you entered will be saved in
 `~/.config/simp/config.json`, allowing you to load it from the regular cli.
