@@ -35,6 +35,5 @@ export function compute(
     }
     computedPassword += computedToken;
   }
-  console.log(tokens);
   console.log(`Final computed password: ${computedPassword}`);
 }

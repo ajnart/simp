@@ -55,5 +55,5 @@ export function validateAlgorithm(algorithm: string): boolean {
       }
     }
   }
-  return true;
+  return (true);
 }

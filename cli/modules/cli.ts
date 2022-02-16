@@ -18,18 +18,9 @@ export async function runCli() {
     })
     .arguments("[algorithm:algorithm]")
     .option("-a, --algorithm <value:algorithm>", "Your algorithm.")
-    .option(
-      "-p, --password <string>",
-      "use the specified password instead",
-    )
-    .type("website", ({ label, name, value }: ITypeInfo): string => {
-      try {
-        validateWebsite(value);
-      } catch (e) {
-        throw new ValidationError(
-          `${label} "${name}" must be a valid website.Error: "${e}"`,
-        );
-      }
+    .option("-p, --password <string>", "use the specified password instead")
+    .type("website", ({ value }: ITypeInfo): string => {
+      validateWebsite(value);
       return value;
     })
     .arguments("[website:website]")
