@@ -9,7 +9,7 @@ import { runConfig } from "./config.ts";
 export async function runCli() {
   const command = new Command()
     .name("simp")
-    .description("Simple password manager")
+    .description("Simply Interpolated Master Password")
     .version("0.0.1")
     .option("-c, --config", "re-start config.")
     .type("algorithm", ({ value }: ITypeInfo): string => {
